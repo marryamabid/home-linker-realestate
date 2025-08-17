@@ -62,10 +62,6 @@ export default function CreateListing() {
           imageUrls: prev.imageUrls.concat(imageUrls),
         }));
         setImageUploadError(false);
-        setFormData((prev) => ({
-          ...prev,
-          imageUrls: [],
-        }));
         setUploading(false);
         console.log("Uploaded images:", imageUrls);
       } catch (error) {
@@ -122,7 +118,7 @@ export default function CreateListing() {
       });
 
       const data = await response.json();
-
+      console.log(data, "from listing");
       if (!response.ok || data.success === false) {
         setError(data.message || "Something went wrong");
         setLoading(false);
