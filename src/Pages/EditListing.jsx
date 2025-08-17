@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 export default function EditListing() {
+  const API = import.meta.env.VITE_API_BASE_URL;
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
@@ -108,7 +109,7 @@ export default function EditListing() {
       setLoading(true);
       setError(false);
 
-      const response = await fetch(`/api/listing/update/${listingId}`, {
+      const response = await fetch(`${API}/api/listing/update/${listingId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -136,7 +137,7 @@ export default function EditListing() {
   };
   const fetchListing = async () => {
     try {
-      const res = await fetch(`/api/listing/getListing/${listingId}`);
+      const res = await fetch(`${API}/api/listing/getListing/${listingId}`);
       const data = await res.json();
       if (data.message === false) {
         console.log(data.message);

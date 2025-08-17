@@ -1,10 +1,9 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Oauth from "../Components/Oauth";
-import { set } from "mongoose";
 
 export default function SignUp() {
+  const API = import.meta.env.VITE_API_BASE_URL;
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null); // State to handle errors
   const [loading, setLoading] = useState(false); // State to handle loading state
@@ -19,7 +18,7 @@ export default function SignUp() {
     setLoading(true); // Start loading
     setError(null); // Reset error state
     try {
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch(`${API}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

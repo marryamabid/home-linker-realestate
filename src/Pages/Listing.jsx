@@ -10,13 +10,13 @@ import {
   FaBath,
   FaBed,
   FaChair,
-  FaMapMarkedAlt,
   FaMapMarkerAlt,
   FaParking,
   FaShare,
 } from "react-icons/fa";
 
 export default function Listing() {
+  const API = import.meta.env.VITE_API_BASE_URL;
   SwiperCore.use([Navigation]);
   const params = useParams();
   const listingId = params.listingId;
@@ -32,7 +32,7 @@ export default function Listing() {
   const fetchListing = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`/api/listing/getListing/${listingId}`);
+      const res = await fetch(`${API}/api/listing/getListing/${listingId}`);
       const data = await res.json();
       if (data.message === false) {
         console.log(data.message);
@@ -40,7 +40,6 @@ export default function Listing() {
         setError(true);
         return;
       }
-      console.log(data);
       setListing(data);
       setLoading(false);
       setError(false);

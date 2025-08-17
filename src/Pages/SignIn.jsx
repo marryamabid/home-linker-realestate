@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import {
   signInStart,
@@ -10,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Oauth from "../Components/Oauth";
 
 export default function SignIp() {
+  const API = import.meta.env.VITE_API_BASE_URL;
   const [formData, setFormData] = useState({});
 
   const navigate = useNavigate(); // Hook to programmatically navigate
@@ -26,7 +26,7 @@ export default function SignIp() {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch("/api/auth/signin", {
+      const res = await fetch(`${API}/api/auth/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

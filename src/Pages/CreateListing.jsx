@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
+  const API = import.meta.env.VITE_API_BASE_URL;
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -111,7 +112,7 @@ export default function CreateListing() {
       setLoading(true);
       setError(false);
 
-      const response = await fetch("/api/listing/create", {
+      const response = await fetch(`${API}/api/listing/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
